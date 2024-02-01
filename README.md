@@ -1,5 +1,5 @@
 # Document Search Application
-Design and build an application that can search documents from a cloud storage service like Dropbox or Google Drive on the content inside the document.
+Design and build an application that can search documents from a cloud storage service on the content inside the document.
 
 
 ## Problem Statement
