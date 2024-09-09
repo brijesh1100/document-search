@@ -1,0 +1,69 @@
+Prompt:
+You are validating an uploaded document image based on specific criteria. The goal is to extract necessary information and ensure the document adheres to the following validation rules:
+
+1. Document Name Verification:
+
+ - Ensure the document contains the specific title: "Corporate Certificate License".
+ - Check if this text is located at the top or predefined location of the document to validate it against a fixed layout.
+ - Validate that the document contains a watermark and stamp of a specific color or format.
+ - If the title or watermark is missing, flag the document as invalid.
+
+2. Expiry Date Validation:
+
+ - Extract the expiry date present on the document.
+ - Compare the expiry date with the current date.
+ - If the document is expired, flag it as invalid. Return both the expiry date and validation status.
+3. License Number Extraction:
+
+ - Extract the license number from the document.
+ - Validate the license number to ensure it follows a specific format (e.g., ABC-1234567).
+ - Return the license number along with its format validation status.
+4. Email and Phone Number Extraction:
+
+ - Extract the email and phone number from the document.
+ - Validate the email address follows the correct format (e.g., name@domain.com).
+ - Validate the phone number format (e.g., (XXX) XXX-XXXX).
+ - Return both the extracted email and phone number along with their validation status.
+
+
+{
+  "document_valid": true,
+  "details": {
+    "document_name": "Corporate Certificate License",
+    "watermark_present": true,
+    "expiry_date": {
+      "value": "2025-09-09",
+      "is_valid": true
+    },
+    "license_number": {
+      "value": "ABC-1234567",
+      "format_valid": true
+    },
+    "contact_info": {
+      "email": {
+        "value": "example@domain.com",
+        "format_valid": true
+      },
+      "phone_number": {
+        "value": "(123) 456-7890",
+        "format_valid": true
+      }
+    }
+  }
+}
+
+Negative Case Handling:
+To prevent users from uploading an invalid document that contains handwritten or typed information simulating the required details (e.g., writing the document title, license number, and email address manually), you can employ the following validation techniques:
+
+Image Quality and Font Consistency:
+
+Ensure the document has consistent fonts and layout alignment. Handwritten or manually typed documents may have inconsistent font types and sizes, while valid documents should have fixed formatting and fonts.
+Watermark and Stamp Detection:
+
+Use OCR (Optical Character Recognition) tools to detect the presence of a genuine watermark or stamp. Validate that these are in the correct positions and have specific colors or patterns that can’t easily be replicated.
+Document Metadata Analysis:
+
+Analyze the document metadata (e.g., resolution, creation date, modification date) to check for signs of tampering or manipulation. If a user manually typed in information, the metadata may show recent modifications inconsistent with a valid document.
+Embedded Security Features:
+
+Check for additional security features (e.g., QR codes, barcodes, holograms, etc.) that may be embedded in the original document, ensuring the document uploaded is genuine and not fabricated.
