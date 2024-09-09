@@ -1,0 +1,56 @@
+Structured Prompt:
+"Please extract and validate the information from the image of a document based on the following criteria:
+
+1. Document Name Validation
+The image must contain the title or document name such as "Corporate Certificate License".
+Ensure the document layout follows a standard format, including title positioning, layout, and font style.
+Extract the document title if present.
+2. Watermark and Stamp Verification
+Check for a specific watermark or stamp, and ensure it matches the required color (e.g., blue or red).
+Extract information about the presence, position, and color of the watermark or stamp.
+Validate its location and consistency with official documents.
+3. Expiry Date Check
+Extract the expiry date of the document.
+Validate that the document is not expired by comparing the expiry date with the current date.
+If the document is expired, flag it as invalid.
+4. License Number Extraction
+Extract the license number from the document.
+Ensure it follows the correct format for a valid license number (e.g., 9-digit format).
+5. Email and Phone Number Extraction
+Extract the email address and phone number from the document.
+Ensure the email format (e.g., user@example.com) and phone number (e.g., +1-234-567-890) are valid.
+6. Negative Case Handling
+If the document appears to be manually written, generated artificially, or does not follow the layout and formatting expected of an official document, flag it as invalid.
+For example, if a user has created a fake document by writing all the necessary information on a plain sheet, look for the absence of the correct watermark, inconsistent fonts, or incorrect document layout.
+Include a check for common formatting errors (like unusual font usage, lack of specific document design elements, etc.) that would indicate it is not an official document.
+Output the extracted information in the following JSON format:"
+
+{
+  "document_title": "Corporate Certificate License",
+  "watermark": {
+    "present": true,
+    "color": "blue",
+    "location": "bottom-right"
+  },
+  "expiry_date": "2026-05-30",
+  "is_expired": false,
+  "license_number": "123456789",
+  "email": "owner@example.com",
+  "phone_number": "+1-234-567-890",
+  "validity_status": "valid"
+}
+
+
+Handling Negative Cases (in the same prompt):
+Yes, you can handle negative cases directly in the same prompt. Here's how it can be done:
+
+Include checks for inconsistencies in layout, such as:
+Incorrect positioning of the title or absence of standard formatting.
+Missing watermark or a different font type or style for important information like the license number or expiry date.
+Check for anomalies, like whether the document looks handwritten or the information seems to be manually entered rather than an official printed document.
+You can flag such documents as "invalid" if any inconsistencies are detected.
+How to Handle Fake Documents:
+Look for official layout patterns, such as specific fonts, placements, watermarks, and seals that are often found in valid documents.
+If all required fields are present but don’t match the design/format of the official document, consider the document invalid.
+Prompt for Negative Case Handling:
+"If the uploaded image contains all required details but appears to be a manually created document without the official layout, stamp, or watermark, mark the document as invalid and provide the reason in the JSON output."
